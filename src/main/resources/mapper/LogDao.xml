@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.aphs.Dao.LogDao">
+  <resultMap id="BaseResultMap" type="com.team.aphs.model.Log">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="spend_time" jdbcType="VARCHAR" property="spendTime" />
+    <result column="base_path" jdbcType="VARCHAR" property="basePath" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="parameter" jdbcType="VARCHAR" property="parameter" />
+    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="permissions" jdbcType="VARCHAR" property="permissions" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, description, username, start_time, spend_time, base_path, uri, url, `method`, 
+    `parameter`, user_agent, ip, `result`, permissions
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Log" useGeneratedKeys="true">
+    insert into log (description, username, start_time, 
+      spend_time, base_path, uri, 
+      url, `method`, `parameter`, 
+      user_agent, ip, `result`, 
+      permissions)
+    values (#{description,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{spendTime,jdbcType=VARCHAR}, #{basePath,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, 
+      #{userAgent,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{permissions,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Log" useGeneratedKeys="true">
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="description != null">
+        description,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="spendTime != null">
+        spend_time,
+      </if>
+      <if test="basePath != null">
+        base_path,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="method != null">
+        `method`,
+      </if>
+      <if test="parameter != null">
+        `parameter`,
+      </if>
+      <if test="userAgent != null">
+        user_agent,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="result != null">
+        `result`,
+      </if>
+      <if test="permissions != null">
+        permissions,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="spendTime != null">
+        #{spendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="basePath != null">
+        #{basePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null">
+        #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="permissions != null">
+        #{permissions,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.aphs.model.Log">
+    update log
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="spendTime != null">
+        spend_time = #{spendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="basePath != null">
+        base_path = #{basePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        `method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null">
+        `parameter` = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null">
+        user_agent = #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        `result` = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="permissions != null">
+        permissions = #{permissions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.aphs.model.Log">
+    update log
+    set description = #{description,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      spend_time = #{spendTime,jdbcType=VARCHAR},
+      base_path = #{basePath,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      `method` = #{method,jdbcType=VARCHAR},
+      `parameter` = #{parameter,jdbcType=VARCHAR},
+      user_agent = #{userAgent,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      `result` = #{result,jdbcType=VARCHAR},
+      permissions = #{permissions,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
