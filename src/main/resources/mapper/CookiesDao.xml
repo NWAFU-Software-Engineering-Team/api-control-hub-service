@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.aphs.Dao.CookiesDao">
+  <resultMap id="BaseResultMap" type="com.team.aphs.model.Cookies">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="expires" jdbcType="BIGINT" property="expires" />
+    <result column="belongs_to_request" jdbcType="INTEGER" property="belongsToRequest" />
+    <result column="request_response_id" jdbcType="BIGINT" property="requestResponseId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, `value`, `path`, expires, belongs_to_request, request_response_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cookies
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cookies
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Cookies" useGeneratedKeys="true">
+    insert into cookies (`name`, `value`, `path`, 
+      expires, belongs_to_request, request_response_id
+      )
+    values (#{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{expires,jdbcType=BIGINT}, #{belongsToRequest,jdbcType=INTEGER}, #{requestResponseId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Cookies" useGeneratedKeys="true">
+    insert into cookies
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="expires != null">
+        expires,
+      </if>
+      <if test="belongsToRequest != null">
+        belongs_to_request,
+      </if>
+      <if test="requestResponseId != null">
+        request_response_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="expires != null">
+        #{expires,jdbcType=BIGINT},
+      </if>
+      <if test="belongsToRequest != null">
+        #{belongsToRequest,jdbcType=INTEGER},
+      </if>
+      <if test="requestResponseId != null">
+        #{requestResponseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.aphs.model.Cookies">
+    update cookies
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="expires != null">
+        expires = #{expires,jdbcType=BIGINT},
+      </if>
+      <if test="belongsToRequest != null">
+        belongs_to_request = #{belongsToRequest,jdbcType=INTEGER},
+      </if>
+      <if test="requestResponseId != null">
+        request_response_id = #{requestResponseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.aphs.model.Cookies">
+    update cookies
+    set `name` = #{name,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      expires = #{expires,jdbcType=BIGINT},
+      belongs_to_request = #{belongsToRequest,jdbcType=INTEGER},
+      request_response_id = #{requestResponseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

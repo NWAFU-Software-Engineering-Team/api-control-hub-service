@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.aphs.Dao.ApiDao">
+  <resultMap id="BaseResultMap" type="com.team.aphs.model.Api">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="api_method" jdbcType="VARCHAR" property="apiMethod" />
+    <result column="api_url" jdbcType="VARCHAR" property="apiUrl" />
+    <result column="api_request" jdbcType="VARCHAR" property="apiRequest" />
+    <result column="api_response" jdbcType="VARCHAR" property="apiResponse" />
+    <result column="creator_id" jdbcType="BIGINT" property="creatorId" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, api_method, api_url, api_request, api_response, creator_id, project_id, ctime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from api
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from api
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Api" useGeneratedKeys="true">
+    insert into api (api_method, api_url, api_request, 
+      api_response, creator_id, project_id, 
+      ctime)
+    values (#{apiMethod,jdbcType=VARCHAR}, #{apiUrl,jdbcType=VARCHAR}, #{apiRequest,jdbcType=VARCHAR}, 
+      #{apiResponse,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Api" useGeneratedKeys="true">
+    insert into api
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="apiMethod != null">
+        api_method,
+      </if>
+      <if test="apiUrl != null">
+        api_url,
+      </if>
+      <if test="apiRequest != null">
+        api_request,
+      </if>
+      <if test="apiResponse != null">
+        api_response,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="apiMethod != null">
+        #{apiMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="apiUrl != null">
+        #{apiUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiRequest != null">
+        #{apiRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="apiResponse != null">
+        #{apiResponse,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.aphs.model.Api">
+    update api
+    <set>
+      <if test="apiMethod != null">
+        api_method = #{apiMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="apiUrl != null">
+        api_url = #{apiUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiRequest != null">
+        api_request = #{apiRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="apiResponse != null">
+        api_response = #{apiResponse,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.aphs.model.Api">
+    update api
+    set api_method = #{apiMethod,jdbcType=VARCHAR},
+      api_url = #{apiUrl,jdbcType=VARCHAR},
+      api_request = #{apiRequest,jdbcType=VARCHAR},
+      api_response = #{apiResponse,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

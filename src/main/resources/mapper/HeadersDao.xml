@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.aphs.Dao.HeadersDao">
+  <resultMap id="BaseResultMap" type="com.team.aphs.model.Headers">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="belongs_to_request_response" jdbcType="BOOLEAN" property="belongsToRequestResponse" />
+    <result column="request_response_id" jdbcType="BIGINT" property="requestResponseId" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, belongs_to_request_response, request_response_id, `key`, `value`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from headers
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from headers
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Headers" useGeneratedKeys="true">
+    insert into headers (belongs_to_request_response, request_response_id, 
+      `key`, `value`)
+    values (#{belongsToRequestResponse,jdbcType=BOOLEAN}, #{requestResponseId,jdbcType=BIGINT}, 
+      #{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Headers" useGeneratedKeys="true">
+    insert into headers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="belongsToRequestResponse != null">
+        belongs_to_request_response,
+      </if>
+      <if test="requestResponseId != null">
+        request_response_id,
+      </if>
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="belongsToRequestResponse != null">
+        #{belongsToRequestResponse,jdbcType=BOOLEAN},
+      </if>
+      <if test="requestResponseId != null">
+        #{requestResponseId,jdbcType=BIGINT},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.aphs.model.Headers">
+    update headers
+    <set>
+      <if test="belongsToRequestResponse != null">
+        belongs_to_request_response = #{belongsToRequestResponse,jdbcType=BOOLEAN},
+      </if>
+      <if test="requestResponseId != null">
+        request_response_id = #{requestResponseId,jdbcType=BIGINT},
+      </if>
+      <if test="key != null">
+        `key` = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.aphs.model.Headers">
+    update headers
+    set belongs_to_request_response = #{belongsToRequestResponse,jdbcType=BOOLEAN},
+      request_response_id = #{requestResponseId,jdbcType=BIGINT},
+      `key` = #{key,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

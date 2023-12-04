@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.aphs.Dao.ResponseDao">
+  <resultMap id="BaseResultMap" type="com.team.aphs.model.Response">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="api_id" jdbcType="BIGINT" property="apiId" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="cookies" jdbcType="VARCHAR" property="cookies" />
+    <result column="headers" jdbcType="VARCHAR" property="headers" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, api_id, body, cookies, headers
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from response
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from response
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Response" useGeneratedKeys="true">
+    insert into response (api_id, body, cookies, 
+      headers)
+    values (#{apiId,jdbcType=BIGINT}, #{body,jdbcType=VARCHAR}, #{cookies,jdbcType=VARCHAR}, 
+      #{headers,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.team.aphs.model.Response" useGeneratedKeys="true">
+    insert into response
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="apiId != null">
+        api_id,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="cookies != null">
+        cookies,
+      </if>
+      <if test="headers != null">
+        headers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="apiId != null">
+        #{apiId,jdbcType=BIGINT},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="headers != null">
+        #{headers,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.team.aphs.model.Response">
+    update response
+    <set>
+      <if test="apiId != null">
+        api_id = #{apiId,jdbcType=BIGINT},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        cookies = #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="headers != null">
+        headers = #{headers,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.team.aphs.model.Response">
+    update response
+    set api_id = #{apiId,jdbcType=BIGINT},
+      body = #{body,jdbcType=VARCHAR},
+      cookies = #{cookies,jdbcType=VARCHAR},
+      headers = #{headers,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
