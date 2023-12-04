@@ -1,6 +1,7 @@
 package com.team.aphs.controller;
 
 import com.team.aphs.Dto.RegistrationRequest;
+import com.team.aphs.api.CommonResult;
 import com.team.aphs.model.User;
 import com.team.aphs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,14 @@ public class RegisterController {
 
     @PostMapping
     @ResponseBody
-    public String register(@RequestBody RegistrationRequest registrationRequest) {
+    public CommonResult register(@RequestBody RegistrationRequest registrationRequest) {
         User user = new User();
         user.setName(registrationRequest.getUsername());
         user.setPassword(registrationRequest.getPassword());
         if (!userService.registerUser(user)) {
-            return "Registration failed";
+            return CommonResult.failed();
         } else {
-            return "Registration successful";
+            return CommonResult.success("注册成功");
         }
     }
 }
