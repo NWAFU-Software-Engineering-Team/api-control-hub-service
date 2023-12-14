@@ -33,8 +33,8 @@ public class LoginController {
         // Authenticate user
         boolean isAuthenticated = userService.authenticateUser(username, password);
         Map<String, String> tokenMap = new HashMap<>();
-        String token = "测试token";
-        tokenMap.put("token", token);
+        String token = "bqddxxwqmfncffacvbpkuxvwvqrhln";
+        tokenMap.put("access_token", token);
 
         if (isAuthenticated) {
             return CommonResult.success(tokenMap);

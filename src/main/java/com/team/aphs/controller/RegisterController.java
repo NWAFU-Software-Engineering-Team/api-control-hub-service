@@ -26,12 +26,12 @@ public class RegisterController {
     @ResponseBody
     public CommonResult register(@RequestBody RegistrationRequest registrationRequest) {
         User user = new User();
-        user.setName(registrationRequest.getUsername());
+        user.setAccount(registrationRequest.getUsername());
         user.setPassword(registrationRequest.getPassword());
         if (!userService.registerUser(user)) {
             return CommonResult.failed();
         } else {
-            return CommonResult.success("注册成功");
+            return CommonResult.success(null, "注册成功");
         }
     }
 }
