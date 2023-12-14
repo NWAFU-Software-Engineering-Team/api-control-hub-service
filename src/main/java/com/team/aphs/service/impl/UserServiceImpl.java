@@ -43,10 +43,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(User user) {
+        //确保账号密码不为空
+        if (user.getAccount() == null || user.getPassword() == null) {
+            return false;
+        }
+        //确保账号唯一
+        if (userDao.getUserByUsername(user.getAccount()) != null) {
+            return false;
+        }
         // 生成随机盐
         String salt = String.valueOf(System.currentTimeMillis());
         user.setSalt(salt);
-
         // 使用MD5加密密码
         String passwordWithSalt = user.getPassword() + salt;
         String encryptedPassword = DigestUtils.md5DigestAsHex(passwordWithSalt.getBytes());
